@@ -1,0 +1,23 @@
+export async function fetchMediaFromApi(id) {
+  //Set base values for the API endpoint
+  const baseDomain = window.location.hostname;
+  const baseURL = "https://cms." + baseDomain;
+  const apiVersion = "v2";
+  const apiNamespace = "wp-json/wp/" + apiVersion + "/media";
+
+  //Structure the API url
+  const apiUrl = baseURL + "/" + apiNamespace + "/" + id;
+
+  //Call for the data and return
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.source_url;
+  } catch (error) {
+    console.error("Error fetching date:", error);
+    return null;
+  }
+}

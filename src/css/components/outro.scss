@@ -1,0 +1,92 @@
+//Import variables
+@import "../setup/vars";
+
+//Outro components styling
+.outro {
+  display: flex;
+  justify-content: center;
+
+  height: auto;
+  width: calc(100% - 40px);
+
+  border-radius: $border-radius $border-radius 0 0;
+  background: linear-gradient(107deg, $green, $blue);
+
+  margin: 45px 20px 0 20px;
+
+  .wrapper {
+    display: block;
+
+    width: 100%;
+    max-width: $tinyGrid;
+    height: auto;
+
+    padding: 100px 20px;
+
+    text-align: center;
+    color: $white;
+
+    .title {
+      margin: 0 0 5px 0;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .button_holder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+
+      margin: 25px auto 0 auto;
+
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        background: rgba(255, 255, 255, 0.75);
+        color: $black;
+
+        border-radius: 150px;
+
+        padding: 10px 17px 10px 10px;
+        margin: 15px;
+
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          align-content: center;
+
+          height: 30px;
+          width: 30px;
+
+          background: #8dd9ce;
+          color: $white;
+          border-radius: 100%;
+
+          margin: 0 10px 0 0;
+        }
+
+        .text {
+          font-family: $font;
+          font-weight: $boldWeight;
+          font-size: 16px;
+        }
+
+        cursor: pointer;
+        transition: all 0.35s ease;
+
+        &:hover {
+          background: white;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}

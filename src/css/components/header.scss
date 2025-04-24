@@ -1,0 +1,50 @@
+//Import variables
+@import "../setup/vars";
+
+//Header components styling
+header {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  height: auto;
+
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+
+  margin: 0 auto;
+  padding: 35px 50px;
+
+  background: transparent;
+  color: $white;
+
+  nav {
+    a {
+      color: $white;
+
+      &:visited,
+      &:focus {
+        color: $white;
+      }
+    }
+
+    &.external {
+      a {
+        display: inline-block;
+
+        margin: 0 0 0 20px;
+
+        font-size: 25px;
+        opacity: 0.5;
+
+        transition: opacity 0.25s ease;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

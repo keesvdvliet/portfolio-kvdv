@@ -1,0 +1,30 @@
+//Colors
+$black: #000000;
+$white: #ffffff;
+$blue: #3eadcf;
+$green: #abe9cd;
+$pink: #d073d8;
+$darkGrey: #363636;
+$lightGrey: #ececec;
+
+//Default values
+$grid: 1364px;
+$tinyGrid: 850px;
+$border-radius: 45px;
+@mixin box-shadow() {
+  -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+}
+@mixin remove-box-shadow() {
+  -webkit-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  -moz-box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+//Fonts
+$font: "Montserrat", sans-serif;
+$regularWeight: 400;
+$mediumWeight: 500;
+$boldWeight: 700;
+$blackWeight: 900;

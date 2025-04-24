@@ -1,0 +1,146 @@
+//Import variables
+@import "vars";
+
+//Enable view transitions
+@view-transition {
+  navigation: auto;
+}
+
+//Base setup
+body {
+  padding: 0;
+  margin: 0;
+  font-family: $font;
+  width: 100%;
+  overflow-x: hidden;
+  background: $black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+}
+
+//Text styling
+h1,
+.h1 {
+  font-size: 55px;
+}
+
+h2,
+.h2 {
+  font-size: 40px;
+}
+
+h3,
+.h3 {
+  font-size: 35px;
+}
+
+h4,
+.h4 {
+  font-size: 30px;
+}
+
+h5,
+.h5 {
+  font-size: 25px;
+}
+
+p,
+.p {
+  font-size: 20px;
+}
+
+//Responsive text-sizes
+@media screen and (max-width: 1325px) {
+  h1,
+  .h1 {
+    font-size: 45px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 30px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 28px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 26px;
+  }
+
+  h5,
+  .h5 {
+    font-size: 20px;
+  }
+
+  p,
+  .p {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 775px) {
+  h1,
+  .h1 {
+    font-size: 35px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 32px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 30px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 27px;
+  }
+
+  p,
+  .p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  h1,
+  .h1 {
+    font-size: 34px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 30px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 28px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 25px;
+  }
+}

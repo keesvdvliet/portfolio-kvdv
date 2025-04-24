@@ -1,0 +1,223 @@
+//Import variables
+@import "../setup/vars";
+
+//Hero components styling
+.hero {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(45deg, $blue, $green);
+  padding: 20px;
+
+  border-radius: 0 0 $border-radius $border-radius;
+}
+
+//Introduction components styling
+.intro {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  width: 100%;
+  height: calc(100vh - 40px);
+
+  background: $black;
+  color: $white;
+
+  @include box-shadow();
+
+  overflow: hidden;
+
+  margin: 0 auto 20px auto;
+  padding: 25px 35px;
+  box-sizing: border-box;
+
+  position: relative;
+
+  animation: intro-animation ease-out 0.5s;
+  animation-fill-mode: forwards;
+  animation-delay: 0.25s;
+
+  /* Starting values for animation */
+  transform: scale(1.05);
+  border-radius: 0;
+
+  .intro_title {
+    display: block;
+
+    width: 100%;
+    max-width: $grid;
+
+    margin: 0 auto 35px auto;
+    padding: 0;
+
+    position: relative;
+
+    .line {
+      display: block;
+
+      .letter {
+        position: relative;
+        animation: letter-entry ease-out 0.25s;
+        animation-fill-mode: forwards;
+        z-index: 0;
+
+        /* Starting values for animation */
+        opacity: 0;
+        left: -25px;
+        filter: blur(10px);
+
+        /* Values for exploding animation */
+        transition: all 0.25s ease;
+
+        &.resting,
+        &.exploding,
+        &.hovering {
+          display: inline-block;
+        }
+
+        &.exploding {
+          color: $green;
+          opacity: 0.45;
+
+          &:nth-child(even) {
+            transform: rotate(-13deg) scale(0.95) translateY(-6px)
+              translateX(-5px);
+          }
+          &:nth-child(odd) {
+            transform: rotate(8deg) scale(0.85) translateY(10px);
+          }
+        }
+      }
+    }
+
+    .emojiOrigin {
+      display: block;
+
+      height: 58px;
+      width: 155px;
+
+      position: absolute;
+      top: 75px;
+      left: 195px;
+      z-index: 1;
+
+      cursor: pointer;
+
+      .singleEmoji {
+        position: absolute;
+      }
+    }
+  }
+
+  .intro_text {
+    display: block;
+
+    width: 100%;
+    max-width: $grid;
+
+    margin: 0 auto;
+    padding: 0;
+
+    position: relative;
+    animation: text-fade ease 0.85s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+
+    /* Starting values for animation */
+    opacity: 0;
+    filter: blur(10px);
+
+    p {
+      max-width: $tinyGrid;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+@keyframes letter-entry {
+  0% {
+    opacity: 0;
+    left: -25px;
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    left: 0;
+    filter: blur(0);
+  }
+}
+
+@keyframes text-fade {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-animation {
+  0% {
+    transform: scale(1.05);
+    border-radius: 0;
+  }
+  100% {
+    transform: scale(1);
+    border-radius: $border-radius;
+  }
+}
+
+@media screen and (max-width: 1325px) {
+  .intro .intro_title .emojiOrigin {
+    height: 50px;
+    width: 134px;
+    top: 62px;
+    left: 159px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .hero {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 775px) {
+  .intro .intro_title .emojiOrigin {
+    height: 44px;
+    width: 110px;
+    top: 45px;
+    left: 120px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .intro .intro_title .emojiOrigin {
+    height: 42px;
+    width: 102px;
+  }
+}
+
+@media screen and (max-width: 305px) {
+  .intro .intro_title .emojiOrigin {
+    height: 40px;
+    width: 100px;
+    top: 87px;
+    left: 0px;
+  }
+}
+
+@media screen and (max-width: 201px) {
+  .intro .intro_title .emojiOrigin {
+    display: none;
+  }
+}
