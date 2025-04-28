@@ -7,12 +7,12 @@
   justify-content: center;
 
   height: auto;
-  width: calc(100% - 40px);
+  width: 100%;
 
   border-radius: $border-radius $border-radius 0 0;
   background: linear-gradient(107deg, $green, $blue);
 
-  margin: 45px 20px 0 20px;
+  margin: 45px 0 0 0;
 
   .wrapper {
     display: block;
