@@ -21,28 +21,39 @@ header {
   color: $white;
 
   nav {
-    a {
-      color: $white;
+    &.main {
+      position: relative;
 
-      &:visited,
-      &:focus {
-        color: $white;
+      .uselessMachine {
+        position: absolute;
+        font-size: 30px;
       }
     }
 
     &.external {
       a {
-        display: inline-block;
+        color: $white;
 
-        margin: 0 0 0 20px;
+        &:visited,
+        &:focus {
+          color: $white;
+        }
+      }
 
-        font-size: 25px;
-        opacity: 0.5;
+      &.external {
+        a {
+          display: inline-block;
 
-        transition: opacity 0.25s ease;
+          margin: 0 0 0 20px;
 
-        &:hover {
-          opacity: 1;
+          font-size: 25px;
+          opacity: 0.5;
+
+          transition: opacity 0.25s ease;
+
+          &:hover {
+            opacity: 1;
+          }
         }
       }
     }

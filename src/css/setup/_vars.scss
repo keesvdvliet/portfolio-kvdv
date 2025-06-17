@@ -10,7 +10,7 @@ $lightGrey: #ececec;
 //Default values
 $grid: 1364px;
 $tinyGrid: 850px;
-$border-radius: 45px;
+$border-radius: 25px;
 @mixin box-shadow() {
   -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
@@ -24,6 +24,7 @@ $border-radius: 45px;
 
 //Fonts
 $font: "Montserrat", sans-serif;
+$codeFont: "Cutive Mono", monospace;
 $regularWeight: 400;
 $mediumWeight: 500;
 $boldWeight: 700;
