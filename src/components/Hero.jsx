@@ -1,6 +1,6 @@
 //React dependicies
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, animate } from "framer-motion";
 
 //Import the component styling
 import "../css/components/hero.scss";
@@ -8,6 +8,7 @@ import "../css/components/hero.scss";
 //Import subcomponents
 import Skills from "./Skills";
 import Header from "./Header";
+import SolarSystem from "./SolarSystem";
 
 //Import functions
 import { fetchPageFromApi } from "../functions/fetchPageFromApi";
@@ -20,7 +21,7 @@ const mainTitleLen = pageContent.acf.title.split("").length;
 const totalAnimationDelay = Number((Number(mainTitleLen * 0.025) + 0.1) * 1000);
 
 //Set Emoji values
-const meInEmoji = ["🏋️", "😸", "🏍", "🎮", "🍷", "☕️", "⛷️", "🎸", "⛺️", "👨‍💻"];
+const meInEmoji = ["💪", "😸", "🏍", "🎮", "🍷", "☕️", "⛷️", "🎸", "⛺️", "👨‍💻"];
 const emojiMax = meInEmoji.length - 1;
 const renderEmojis = 10;
 const nameLetterLocs = [7, 8, 9, 10];
@@ -141,6 +142,8 @@ function Intro() {
       <div className="intro_text">
         <p>{pageContent.acf.text}</p>
       </div>
+
+      <SolarSystem />
     </section>
   );
 }
