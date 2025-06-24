@@ -1,6 +1,7 @@
 //React dependicies
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 //Import the component styling
 import "../css/components/projects.scss";
@@ -31,15 +32,35 @@ export default function Projects() {
   return (
     <>
       <section className="projects">
-        <div className="project_list">
-          {portfolio_projects.map((item, key) => (
-            <Case key={item.id} item={item} no={key} />
-          ))}
+        <div className="projects_wrapper">
+          <div className="project_side">
+            <h3 className="h2 title">{pageContent.acf.title}</h3>
+            <p>{pageContent.acf.text}</p>
+          </div>
+
+          <Swiper className="project_list" spaceBetween={30} slidesPerView={2}>
+            {portfolio_projects.map((item, key) => (
+              <SwiperSlide key={key}>
+                {({ isActive, isPrev, isNext, isVisible }) => (
+                  <Caseinfo
+                    item={item}
+                    activeState={isActive}
+                    prevState={isPrev}
+                    nextState={isNext}
+                    visibleState={isVisible}
+                  />
+                )}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
-        <div className="project_side">
-          <h3 className="h2 title">{pageContent.acf.title}</h3>
-          <p>{pageContent.acf.text}</p>
+        <div className="projects_graphic">
+          <span className="circle_1">&nbsp;</span>
+          <span className="circle_2">&nbsp;</span>
+          <span className="circle_3">&nbsp;</span>
+          <span className="circle_4">&nbsp;</span>
+          <span className="circle_5">&nbsp;</span>
         </div>
       </section>
     </>
@@ -47,102 +68,23 @@ export default function Projects() {
 }
 
 //Case components
-function Case({ no, item }) {
-  const [openProject, setOpenProject] = useState(null);
-
-  function handleOpenProject(image, id) {
-    //Set states
-    setOpenProject(id);
-  }
-
-  //Set references for the in-view object and define some animation values
-  let initialTop = "30px";
-  if (no === 0) {
-    initialTop = "55px";
-  }
-  if (no === 1) {
-    initialTop = "-75px";
-  }
-  if (no === 2) {
-    initialTop = "40px";
-  }
-
-  const inViewRef = useRef(null);
-  const isInView = useInView(inViewRef, {
-    once: true,
-    margin: "250px 0px 0px 0px",
-  });
-
+function Caseinfo({ item, activeState, prevState, nextState, visibleState }) {
   return (
-    <AnimatePresence>
-      <motion.div
-        className={`case_card ${openProject === item.id ? "active" : ""}`}
-        ref={inViewRef}
-        initial={{ top: initialTop }}
-        animate={isInView ? { top: "0" } : {}}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Clickable Image */}
-        <motion.div
-          className={`case_card_thumbnail_element`}
-          layoutId={`popup-image-${item.id}`} // Unique ID for Framer Motion layout animation
-          onClick={() => handleOpenProject(item.acf.img, item.id)}
-          style={{ backgroundColor: item.acf.bgColor }}
-        >
-          <span className={`case_card_thumbnail_overlay ${item.acf.layout}`}>
-            <h4 className="p title">{item.title.rendered}</h4>
-            <span className="icon">
-              <i className="fas fa-angle-right"></i>
-            </span>
+    <div
+      className={`project_card ${activeState || prevState ? "past" : ""} ${
+        nextState || visibleState ? "next" : ""
+      }`}
+      style={{ backgroundColor: item.acf.bgColor }}
+    >
+      <div className="project_card_contents">
+        <img src={item.acf.img} className="thumbnail" />
+
+        <div className="round_btn view_more">
+          <span className="icon">
+            <i className="fas fa-eye"></i>
           </span>
-
-          <motion.img
-            src={item.acf.img}
-            alt={item.title.rendered}
-            className="case_image"
-          />
-        </motion.div>
-
-        {/* Pop-up Modal */}
-        {openProject && (
-          <motion.div
-            className="case_card_window"
-            onClick={() => handleOpenProject(null, null)}
-            initial={{ transform: "scale(.9)" }}
-            animate={{ transform: "scale(1)" }}
-            exit={{ transform: "scale(.9)" }}
-            transition={{ type: "spring" }}
-          >
-            <motion.div
-              className="window_modal"
-              style={{ backgroundColor: item.acf.bgColor }}
-              layoutId={`popup-image-${item.id}`}
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-            >
-              {/* Animated Image Transition */}
-              <motion.img
-                src={item.acf.img}
-                alt={item.title.rendered}
-                className="case_image"
-              />
-
-              {/* Text Content */}
-              <motion.div className="case_description">
-                <h4 className="title">{item.title.rendered}</h4>
-                <p>{item.acf.desc}</p>
-
-                {/* Close Button */}
-                <button
-                  onClick={() => handleOpenProject(null, null)}
-                  className="close_button"
-                >
-                  <i className="fas fa-times"></i>
-                </button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </motion.div>
-    </AnimatePresence>
+        </div>
+      </div>
+    </div>
   );
 }

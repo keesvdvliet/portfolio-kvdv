@@ -1,0 +1,23 @@
+* {
+  cursor: none;
+}
+
+.animated-cursor {
+  //   display: none !important;
+
+  height: 24px;
+  width: 24px;
+
+  //display: block;
+
+  position: fixed;
+  top: 0;
+  z-index: 10000000000;
+
+  pointer-events: none;
+
+  transform: translate3d(-13px, -13px, 0);
+
+  border-radius: 100%;
+  backdrop-filter: invert(100%);
+}

@@ -8,6 +8,7 @@ import "../css/components/hero.scss";
 //Import subcomponents
 import Skills from "./Skills";
 import Header from "./Header";
+import About from "./About";
 import SolarSystem from "./SolarSystem";
 
 //Import functions
@@ -51,13 +52,7 @@ function Intro() {
 
   //Function that handle the exploding effect when clicking
   function handleClick() {
-    //Get an random Emoji from the input
-    const randomEmojiKey = Math.floor(Math.random() * (emojiMax - 0 + 1)) + 0;
-    const randomEmoji = meInEmoji[randomEmojiKey];
-    const explodeThese = Array(renderEmojis).fill(randomEmoji);
-
-    //Apply the random Emoji to the state and execute the explosion effect
-    setEmojis(explodeThese);
+    setEmojis(meInEmoji);
     setExploding(true);
     setLetterState("exploding");
     resetExplosion();
@@ -72,18 +67,10 @@ function Intro() {
     }, 1000);
   }
 
-  //On mount execute a first Emoji explosion
-  useEffect(() => {
-    setTimeout(() => {
-      setExploding(true);
-      setLetterState("exploding");
-      resetExplosion();
-    }, totalAnimationDelay);
-  }, []);
-
   return (
     <section className="intro">
       <Header />
+      {/* <About /> */}
 
       <h1 className="intro_title">
         {/* Split up the title into seperate lines and letter objects */}
@@ -107,6 +94,11 @@ function Intro() {
             ))}
           </span>
         ))}
+
+        {/* Render the about me pane */}
+        <span className="about_trigger">
+          <i className="fas fa-info" />
+        </span>
 
         {/* Render the Emojis here */}
         <span

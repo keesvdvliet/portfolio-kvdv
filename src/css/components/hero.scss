@@ -98,6 +98,29 @@
       }
     }
 
+    .about_trigger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+
+      height: 27px;
+      width: 27px;
+      border-radius: 100%;
+
+      text-align: center;
+      font-size: 16px;
+
+      position: absolute;
+      top: 56px;
+      left: 335px;
+      z-index: 1;
+
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.35);
+      opacity: 0.5;
+    }
+
     .emojiOrigin {
       display: block;
 
@@ -183,9 +206,9 @@
 
 @media screen and (max-width: 1325px) {
   .intro .intro_title {
-    .emojiHint {
-      top: 20px;
-      left: 197px;
+    .about_trigger {
+      top: 42px;
+      left: 276px;
     }
 
     .emojiOrigin {
