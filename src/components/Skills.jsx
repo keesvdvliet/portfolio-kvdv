@@ -106,7 +106,7 @@ export default function Skills() {
           {(activeList === "dev" && dev_stack.length >= 5) ||
           (activeList === "other" && other_stack.length >= 5) ? (
             <button
-              className="skill_extender"
+              className="skill_extender btn white"
               onClick={() => setOpenStack((s) => !s)}
             >
               <span className="icon">

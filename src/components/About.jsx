@@ -4,10 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 
-//Swiper styles
-// import "swiper/css";
-// import "swiper/css/autoplay";
-// import "swiper/css/free-mode";
+//Import functions
+import { fetchPageFromApi } from "../functions/fetchPageFromApi";
+import { fetchMediaFromApi } from "../functions/fetchMediaFromApi";
+
+const pageID = 175; //ID of the about me section content
+const pageContent = await fetchPageFromApi(
+  pageID,
+  import.meta.env.VITE_basedomain
+);
+const passportPhoto = await fetchMediaFromApi(
+  pageContent.acf.photo,
+  import.meta.env.VITE_basedomain
+);
 
 //Import the component styling
 import "../css/components/about.scss";
@@ -32,49 +41,37 @@ export default function About({ closeWindow }) {
     //Return the years
     return years;
   }
+  const currentAge = calcYearsSince(pageContent.acf.birthdate);
 
-  const currentAge = calcYearsSince("1995-11-10");
-
-  //Create array of icons
+  //Create array of icons for the animated verification bar at the botttom
   const verificationBarIcons = [
-    "fas fa-cat",
-    "fas fa-smile",
-    "fas fa-hand-peace",
-    "fas fa-car",
-    "fas fa-gamepad",
-    "fas fa-bug",
-    "fas fa-rocket",
-    "fas fa-motorcycle",
-    "fas fa-record-vinyl",
-    "fas fa-tent",
-    "fas fa-person-skiing",
-    "fas fa-jedi",
-    "fas fa-heart",
-    "fas fa-guitar",
-    "fas fa-dungeon",
-    "fas fa-computer",
-    "fa fa-moon",
-    "fa fa-code",
-    "fa fa-film",
-    "fa fa-seedling",
+    "fa-cat",
+    "fa-smile",
+    "fa-hand-peace",
+    "fa-car",
+    "fa-gamepad",
+    "fa-bug",
+    "fa-rocket",
+    "fa-motorcycle",
+    "fa-record-vinyl",
+    "fa-tent",
+    "fa-person-skiing",
+    "fa-jedi",
+    "fa-heart",
+    "fa-guitar",
+    "fa-dungeon",
+    "fa-computer",
+    "fa-moon",
+    "fa-code",
+    "fa-film",
+    "fa-seedling",
   ];
 
   //Create array of hobbies
-  const hobbyItems = [
-    { icon: "🏍️", text: "Motorrijder" },
-    { icon: "🎸", text: "Metal/Rock enjoyer" },
-    { icon: "💿", text: "Vinyl verzamelaar" },
-    { icon: "🧑‍💻", text: "Gek op code tikken" },
-    { icon: "⛺️", text: "Kamperen" },
-    { icon: "🎮", text: "Games" },
-    { icon: "🚀", text: "Space" },
-    { icon: "🐈", text: "Foxie" },
-    { icon: "🧙‍♂️", text: "LOTR" },
-    { icon: "⛷️", text: "Skiën" },
-    { icon: "💪", text: "Sporten" },
-    { icon: "📖", text: "Lezen" },
-    { icon: "🎥", text: "Motion design" },
-  ];
+  const hobbyItems = pageContent.acf.hobbies.map((hobby) => ({
+    icon: hobby.icon,
+    text: hobby.text,
+  }));
 
   return (
     <AnimatePresence>
@@ -89,13 +86,13 @@ export default function About({ closeWindow }) {
           >
             <div className="passport_header">
               <div className="passport_photo">
-                <img src="https://cms.keesvandervliet.com/wp-content/uploads/2025/06/keesvdvliet.jpeg" />
+                <img src={passportPhoto} />
               </div>
 
               <div className="passport_maininfo">
                 <div className="passport_item">
                   <span className="label">Naam</span>
-                  <span className="value">Kees</span>
+                  <span className="value">{pageContent.acf.name}</span>
                 </div>
                 <div className="passport_item">
                   <span className="label">Leeftijd</span>
@@ -103,7 +100,7 @@ export default function About({ closeWindow }) {
                 </div>
                 <div className="passport_item">
                   <span className="label">Functie</span>
-                  <span className="value">Digital & Motion Developer</span>
+                  <span className="value">{pageContent.acf.function}</span>
                 </div>
               </div>
             </div>
@@ -145,7 +142,7 @@ export default function About({ closeWindow }) {
                   key={`slide_${key}`}
                   className="verification_bar_item"
                 >
-                  <i className={icon}></i>
+                  <i className={`fas ${icon}`}></i>
                 </SwiperSlide>
               ))}
             </Swiper>

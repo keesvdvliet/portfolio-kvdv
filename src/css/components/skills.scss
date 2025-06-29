@@ -15,38 +15,27 @@
 
   .skill_extender {
     display: none;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    margin: 0 auto;
 
-    background: rgba(255, 255, 255, 0.75);
-    color: $black;
+    z-index: 888;
+    left: unset;
+    top: unset;
 
-    border-radius: 150px;
+    @include box-shadow();
 
-    padding: 10px 17px 10px 10px;
-    margin: 15px auto 0 auto;
+    &::after {
+      display: none;
+      content: "";
 
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
+      height: 20px;
+      width: 200%;
 
-      height: 30px;
-      width: 30px;
+      position: absolute;
+      z-index: 777;
+      top: -10px;
+      left: -50%;
 
-      background: #8dd9ce;
-      color: $white;
-      border-radius: 100%;
-
-      margin: 0 10px 0 0;
-    }
-
-    .text {
-      font-family: $font;
-      font-weight: $boldWeight;
-      font-size: 16px;
+      background: hotpink;
     }
   }
 
@@ -391,7 +380,7 @@
           .skill_cards {
             .skill_card {
               margin-top: 0 !important;
-              margin-bottom: 10px !important;
+              margin-bottom: 18px !important;
               transform: scale(1) !important;
             }
           }

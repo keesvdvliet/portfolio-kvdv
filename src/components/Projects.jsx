@@ -64,33 +64,40 @@ export default function Projects() {
   return (
     <>
       <section className="projects">
-        <div className="projects_wrapper">
-          <div className="project_side">
-            <h3 className="h2 title">{pageContent.acf.title}</h3>
-            <p>{pageContent.acf.text}</p>
-          </div>
+        <div className="projects_container">
+          <div className="projects_wrapper">
+            <div className="project_side">
+              <h3 className="h2 title">{pageContent.acf.title}</h3>
+              <p>{pageContent.acf.text}</p>
+            </div>
 
-          <Swiper
-            className="project_list"
-            spaceBetween={30}
-            slidesPerView={2}
-            modules={[Mousewheel]}
-            mousewheel
-          >
-            {portfolio_projects.map((item, key) => (
-              <SwiperSlide key={key}>
-                {({ isActive, isPrev, isNext }) => (
-                  <Caseinfo
-                    item={item}
-                    activeState={isActive}
-                    prevState={isPrev}
-                    nextState={isNext}
-                    openWindow={openProjectWindow}
-                  />
-                )}
-              </SwiperSlide>
-            ))}
-          </Swiper>
+            <Swiper
+              className="project_list"
+              spaceBetween={30}
+              slidesPerView={1.5}
+              breakpoints={{
+                750: {
+                  slidesPerView: 2.5,
+                },
+              }}
+              modules={[Mousewheel]}
+              mousewheel
+            >
+              {portfolio_projects.map((item, key) => (
+                <SwiperSlide key={key}>
+                  {({ isActive, isPrev, isNext }) => (
+                    <Caseinfo
+                      item={item}
+                      activeState={isActive}
+                      prevState={isPrev}
+                      nextState={isNext}
+                      openWindow={openProjectWindow}
+                    />
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
 
         <div className="projects_graphic">{circleGraphic}</div>
@@ -123,14 +130,6 @@ function Caseinfo({ item, activeState, prevState, nextState, openWindow }) {
     const centerY = rect.height / 2;
 
     const rotateMax = 15; //Set maximum degrees for the angle
-
-    const offsetY = y - centerY;
-    const manipulatorY = offsetY > 0 ? -1 : 1;
-
-    const percentX = (x - centerX) / centerX;
-    const percentY = (centerY - y) / centerY;
-
-    console.log(`x${percentX} / y${percentY}`);
 
     //Set the angle and rotations
     const deltaX = ((x - centerX) / centerX) * rotateMax;
