@@ -8,7 +8,10 @@ import "../css/components/outro.scss";
 import { fetchPageFromApi } from "../functions/fetchPageFromApi";
 
 //Import page conent
-const pageContent = await fetchPageFromApi(133);
+const pageContent = await fetchPageFromApi(
+  133,
+  import.meta.env.VITE_basedomain
+);
 
 //Render the default
 export default function Outro() {

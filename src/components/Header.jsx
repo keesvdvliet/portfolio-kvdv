@@ -6,7 +6,10 @@ import "../css/components/header.scss";
 
 //Import functions
 import { fetchDataFromApi } from "../functions/fetchFromApi";
-const mainMenu = await fetchDataFromApi("links");
+const mainMenu = await fetchDataFromApi(
+  "links",
+  import.meta.env.VITE_basedomain
+);
 
 //Render the default
 export default function Header() {

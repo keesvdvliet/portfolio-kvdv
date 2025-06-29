@@ -16,7 +16,10 @@ import { fetchDataFromApi } from "../functions/fetchFromApi";
 import { fetchPageFromApi } from "../functions/fetchPageFromApi";
 
 //Fetch the skill list via the REST api
-const skill_list_raw = await fetchDataFromApi("skills");
+const skill_list_raw = await fetchDataFromApi(
+  "skills",
+  import.meta.env.VITE_basedomain
+);
 const skill_list = skill_list_raw.map((skill) => ({
   ...skill,
   acf: {
@@ -29,7 +32,10 @@ const other_stack = skill_list.filter((skill) => skill.acf.type === "other");
 
 //Import functions
 const pageID = 69; //ID of the skill page in the CMS
-const pageContent = await fetchPageFromApi(pageID);
+const pageContent = await fetchPageFromApi(
+  pageID,
+  import.meta.env.VITE_basedomain
+);
 
 //Set the title object
 const toggleTitles = pageContent.acf.title.split("|");

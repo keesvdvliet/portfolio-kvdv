@@ -14,7 +14,10 @@ import SolarSystem from "./SolarSystem";
 //Import functions
 import { fetchPageFromApi } from "../functions/fetchPageFromApi";
 const pageID = 61; //ID of the home page in the CMS
-const pageContent = await fetchPageFromApi(pageID);
+const pageContent = await fetchPageFromApi(
+  pageID,
+  import.meta.env.VITE_basedomain
+);
 
 //Set the title object
 const mainTitle = pageContent.acf.title.split("|");

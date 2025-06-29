@@ -1,6 +1,5 @@
-export async function fetchDataFromApi(call) {
+export async function fetchDataFromApi(call, baseDomain) {
   //Set base values for the API endpoint
-  const baseDomain = "keesvandervliet.com";
   const baseURL = "https://cms." + baseDomain;
   const apiVersion = "v2";
   const apiNamespace = "wp-json/wp/" + apiVersion;

@@ -18,20 +18,29 @@ import { fetchPageFromApi } from "../functions/fetchPageFromApi";
 import { fetchMediaFromApi } from "../functions/fetchMediaFromApi";
 
 //Fetch the projects via the REST api
-const portfolio_projects_raw = await fetchDataFromApi("projects");
+const portfolio_projects_raw = await fetchDataFromApi(
+  "projects",
+  import.meta.env.VITE_basedomain
+);
 const portfolio_projects = await Promise.all(
   portfolio_projects_raw.map(async (project) => ({
     ...project,
     acf: {
       ...project.acf,
-      img: await fetchMediaFromApi(project.acf.img),
+      img: await fetchMediaFromApi(
+        project.acf.img,
+        import.meta.env.VITE_basedomain
+      ),
     },
   }))
 );
 
 //Page content
 const pageID = 91; //ID of the projects page in the CMS
-const pageContent = await fetchPageFromApi(pageID);
+const pageContent = await fetchPageFromApi(
+  pageID,
+  import.meta.env.VITE_basedomain
+);
 
 //Render the default
 export default function Projects() {

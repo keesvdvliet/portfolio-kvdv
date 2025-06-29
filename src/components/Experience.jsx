@@ -9,12 +9,24 @@ import { fetchDataFromApi } from "../functions/fetchFromApi";
 import { fetchPageFromApi } from "../functions/fetchPageFromApi";
 
 //Fetch the experience list(s) via the REST api
-const work_experience = await fetchDataFromApi("experience");
-const study_experience = await fetchDataFromApi("education");
+const work_experience = await fetchDataFromApi(
+  "experience",
+  import.meta.env.VITE_basedomain
+);
+const study_experience = await fetchDataFromApi(
+  "education",
+  import.meta.env.VITE_basedomain
+);
 
 //Import functions
-const pageWorkContent = await fetchPageFromApi(77);
-const pageStudyContent = await fetchPageFromApi(78);
+const pageWorkContent = await fetchPageFromApi(
+  77,
+  import.meta.env.VITE_basedomain
+);
+const pageStudyContent = await fetchPageFromApi(
+  78,
+  import.meta.env.VITE_basedomain
+);
 
 //Render the default
 export default function Experience() {
