@@ -62,9 +62,12 @@ function ExperienceList({ title, description, list }) {
             {item.acf.labelActive && (
               <div
                 className="label"
-                style={{ backgroundColor: item.acf.labelColor }}
+                style={{
+                  backgroundColor: item.acf.labelColor,
+                  color: item.acf.textColor,
+                }}
               >
-                {item.acf.labelDesc}
+                <span className="label_content">{item.acf.labelDesc}</span>
               </div>
             )}
           </div>

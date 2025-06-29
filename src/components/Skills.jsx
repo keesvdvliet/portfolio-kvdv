@@ -67,14 +67,17 @@ export default function Skills() {
 
   return (
     <section className="skills">
-      <div className="scroller_wrapper">
+      <div
+        className="scroller_wrapper cursor_hint"
+        data-cursor-text="scroll"
+        data-cursor-icon="fas fa-arrows-up-down"
+      >
         <div className={`skill_scroller ${openStack ? "stack_open" : ""}`}>
           <AnimatePresence>
             {activeList === "dev" ? (
               <motion.div exit={{ opacity: 0, transform: "translateY(-35px)" }}>
                 <SkillsList
                   list={dev_stack}
-                  count={dev_stack.length}
                   current={listPosition}
                   type="visual"
                 />
@@ -87,7 +90,6 @@ export default function Skills() {
               <motion.div exit={{ opacity: 0, transform: "translateY(-35px)" }}>
                 <SkillsList
                   list={other_stack}
-                  count={other_stack.length}
                   current={listPosition}
                   type="visual"
                 />
@@ -118,14 +120,12 @@ export default function Skills() {
             {activeList === "dev" ? (
               <SkillsList
                 list={dev_stack}
-                count={dev_stack.length}
                 current={listPosition}
                 type="object"
               />
             ) : (
               <SkillsList
                 list={other_stack}
-                count={other_stack.length}
                 current={listPosition}
                 type="object"
               />
@@ -137,9 +137,11 @@ export default function Skills() {
 
       <div className="skill_side">
         <div
-          className={`skill_switcher ${
+          className={`skill_switcher cursor_hint ${
             activeList === "dev" ? "left" : "right"
           }`}
+          data-cursor-text="switch"
+          data-cursor-icon="fas fa-repeat"
           onClick={() => handleSetActiveList()}
         >
           <div className="h2 switch_name l">{toggleTitles[0]}</div>
@@ -152,8 +154,8 @@ export default function Skills() {
   );
 }
 
-//Skilllist components
-function SkillsList({ list, count, current, type }) {
+//Skills list component
+function SkillsList({ list, current, type }) {
   return (
     <ul className="skill_cards">
       {list.map((skill, index) => (
@@ -170,6 +172,7 @@ function SkillsList({ list, count, current, type }) {
   );
 }
 
+//Single skill card component
 function SkillCard({ className, skill, index, currentItem, type }) {
   //Define the styling value we are needing
   let transForm, zIndex, topMarg, botMarg;

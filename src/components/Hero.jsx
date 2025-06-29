@@ -1,6 +1,6 @@
 //React dependicies
-import React, { useEffect, useState } from "react";
-import { motion, animate } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 //Import the component styling
 import "../css/components/hero.scss";
@@ -18,14 +18,9 @@ const pageContent = await fetchPageFromApi(pageID);
 
 //Set the title object
 const mainTitle = pageContent.acf.title.split("|");
-const mainTitleLen = pageContent.acf.title.split("").length;
-const totalAnimationDelay = Number((Number(mainTitleLen * 0.025) + 0.1) * 1000);
 
 //Set Emoji values
 const meInEmoji = ["💪", "😸", "🏍", "🎮", "🍷", "☕️", "⛷️", "🎸", "⛺️", "👨‍💻"];
-const emojiMax = meInEmoji.length - 1;
-const renderEmojis = 10;
-const nameLetterLocs = [7, 8, 9, 10];
 
 //Random offset calculation for the Emojis
 const getRandomOffset = () => ({
@@ -43,18 +38,18 @@ export default function Hero() {
   );
 }
 
-//Introduction components
+//Introduction component
 function Intro() {
   //Set states for the Emoji explosion effect
   const [emojis, setEmojis] = useState(meInEmoji);
   const [exploding, setExploding] = useState(false);
-  const [letterState, setLetterState] = useState("resting");
+  const [aboutWindowStatus, setAboutWindowStatus] = useState(false);
 
   //Function that handle the exploding effect when clicking
   function handleClick() {
     setEmojis(meInEmoji);
     setExploding(true);
-    setLetterState("exploding");
+    setAboutWindowStatus((a) => !a);
     resetExplosion();
   }
 
@@ -63,79 +58,101 @@ function Intro() {
     setTimeout(() => {
       setEmojis([]);
       setExploding(false);
-      setLetterState("resting");
     }, 1000);
   }
 
+  //Function that closes the about window
+  function closeAbout() {
+    setAboutWindowStatus((a) => !a);
+  }
+
   return (
-    <section className="intro">
-      <Header />
-      {/* <About /> */}
+    <>
+      {aboutWindowStatus && <About closeWindow={closeAbout} />}
 
-      <h1 className="intro_title">
-        {/* Split up the title into seperate lines and letter objects */}
-        {mainTitle.map((line, i) => (
-          <span className="line" key={i}>
-            {line.split("").map((letter, j) => (
-              //Create the single letters and add the correct animtion delay
-              <span
-                className={`letter ${
-                  (i === 1) & nameLetterLocs.includes(j) ? letterState : ""
-                }`}
-                style={{
-                  animationDelay:
-                    Number(Number(j * 0.025) + 0.15 + Number(i * 0.05) + 0.2) +
-                    "s",
-                }}
-                key={j}
-              >
-                {letter}
-              </span>
-            ))}
-          </span>
-        ))}
+      <section className="intro">
+        <Header />
 
-        {/* Render the about me pane */}
-        <span className="about_trigger">
-          <i className="fas fa-info" />
-        </span>
+        <h1 className="intro_title">
+          {/* Split up the title into seperate lines and letter objects */}
+          {mainTitle.map((line, i) => (
+            <span className="line" key={i}>
+              {line.split("").map((letter, j) => (
+                //Create the single letters and add the correct animtion delay
+                <span
+                  className={"letter"}
+                  style={{
+                    animationDelay:
+                      Number(
+                        Number(j * 0.025) + 0.15 + Number(i * 0.05) + 0.2
+                      ) + "s",
+                  }}
+                  key={j}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
+          ))}
 
-        {/* Render the Emojis here */}
-        <span
-          className="emojiOrigin"
-          onClick={() => {
-            if (!exploding) {
-              handleClick();
-            }
-          }}
-        >
-          {emojis.map((emoji, k) => {
-            const offset = getRandomOffset();
-
-            return (
-              <motion.span
-                className="singleEmoji"
-                key={k}
-                initial={{ opacity: 1, x: 0, y: 0, scale: 0 }}
-                animate={
-                  exploding
-                    ? { opacity: 0, x: offset.x, y: offset.y, scale: 3.25 }
-                    : {}
+          {/* Render the about me info button */}
+          <AnimatePresence>
+            <motion.div
+              className="about_hint cursor_hint"
+              data-cursor-text="over"
+              data-cursor-icon="fas fa-hand-peace"
+              key={"info-button"}
+              layout
+              layoutId={"info-button"}
+              onClick={() => {
+                if (!exploding) {
+                  handleClick();
                 }
-                transition={{ duration: 1, transition: "spring" }}
-              >
-                {emoji}
-              </motion.span>
-            );
-          })}
-        </span>
-      </h1>
+              }}
+            >
+              <i className="fas fa-info" />
+            </motion.div>
+          </AnimatePresence>
 
-      <div className="intro_text">
-        <p>{pageContent.acf.text}</p>
-      </div>
+          {/* Render the Emojis here */}
+          <span
+            className="emojiOrigin cursor_hint"
+            data-cursor-text="over"
+            data-cursor-icon="fas fa-hand-peace"
+            onClick={() => {
+              if (!exploding) {
+                handleClick();
+              }
+            }}
+          >
+            {emojis.map((emoji, k) => {
+              const offset = getRandomOffset();
 
-      <SolarSystem />
-    </section>
+              return (
+                <motion.span
+                  className="singleEmoji"
+                  key={k}
+                  initial={{ opacity: 1, x: 0, y: 0, scale: 0 }}
+                  animate={
+                    exploding
+                      ? { opacity: 0, x: offset.x, y: offset.y, scale: 3.25 }
+                      : {}
+                  }
+                  transition={{ duration: 1, transition: "spring" }}
+                >
+                  {emoji}
+                </motion.span>
+              );
+            })}
+          </span>
+        </h1>
+
+        <div className="intro_text">
+          <p>{pageContent.acf.text}</p>
+        </div>
+
+        <SolarSystem />
+      </section>
+    </>
   );
 }

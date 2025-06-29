@@ -98,7 +98,7 @@
       }
     }
 
-    .about_trigger {
+    .about_hint {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -131,8 +131,6 @@
       top: 75px;
       left: 195px;
       z-index: 1;
-
-      cursor: pointer;
 
       .singleEmoji {
         position: absolute;
@@ -206,7 +204,7 @@
 
 @media screen and (max-width: 1325px) {
   .intro .intro_title {
-    .about_trigger {
+    .about_hint {
       top: 42px;
       left: 276px;
     }

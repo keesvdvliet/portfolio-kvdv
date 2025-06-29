@@ -8,14 +8,14 @@
   width: 100%;
   height: auto;
 
-  background: $black;
   color: $white;
   border-radius: $border-radius $border-radius 0 0;
 
-  padding: 0 0 75px 0;
-  margin: 0 0 0 0;
+  padding: 0;
+  margin: 0;
 
   position: relative;
+  z-index: 0;
 
   &::before {
     display: block;
@@ -43,8 +43,9 @@
     height: auto;
 
     background: $black;
+    background: linear-gradient(337deg, #25303d, #000000);
     border-radius: $border-radius $border-radius 0 0;
-    padding: 125px 0 0 0;
+    padding: 125px 0 95px 0;
 
     position: relative;
     z-index: 1;
@@ -107,8 +108,25 @@
         top: 4px;
         left: 0;
 
-        background: $darkGrey;
+        border: 1px solid $white;
         border-radius: 100%;
+        opacity: 0.5;
+      }
+
+      &::after {
+        content: "";
+        display: block;
+
+        height: 12px;
+        width: 12px;
+
+        position: absolute;
+        top: 13px;
+        left: 9px;
+
+        border: 1px solid $white;
+        border-radius: 100%;
+        opacity: 0.4;
       }
 
       .function {
@@ -138,18 +156,43 @@
         align-items: center;
         align-content: center;
 
-        height: 35px;
+        height: 30px;
         width: auto;
 
-        padding: 0 17px;
+        padding: 0 15px;
 
         font-size: 14px;
         border-radius: 150px;
         font-weight: $boldWeight;
+        text-transform: lowercase;
 
         position: relative;
         left: 30px;
-        top: -3px;
+        top: -2px;
+
+        .label_content {
+          position: relative;
+          z-index: 1;
+        }
+
+        &::before {
+          content: "";
+          display: block;
+
+          height: calc(100% + 6px);
+          width: calc(100% + 6px);
+
+          position: absolute;
+          top: -3px;
+          left: -3px;
+          z-index: 0;
+
+          background-color: inherit;
+          border-radius: 150px;
+          opacity: 0.7;
+
+          pointer-events: none;
+        }
       }
 
       &:first-child {

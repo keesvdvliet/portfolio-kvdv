@@ -15,13 +15,14 @@ import marsTexture from "../../public/textures/mars_texture.jpg";
 import uranusTexture from "../../public/textures/uranus_texture.jpg";
 import ringsTexture from "../../public/textures/rings_texture.png";
 
-//Define planets (texture / size / distance / rotationspeed )
+//Define planets (texture / size / distance / rotationspeed / hasRings )
 const planets = {
   earth: [earthTexture, 0.25, 0.35, 0.025, false],
   mars: [marsTexture, 0.09, 0.95, 0.045, false],
   uranus: [uranusTexture, 0.3, 0.7, 0.035, true],
 };
 
+//Sun component (always located at the centre)
 function Sun() {
   //Create the texture map
   const sunMap = useLoader(TextureLoader, sunTexture);
@@ -37,6 +38,7 @@ function Sun() {
   );
 }
 
+//Planet component
 function Planet({ name }) {
   //Set the reference value for this planet
   const planetRef = useRef(null);
@@ -101,6 +103,7 @@ function Planet({ name }) {
   );
 }
 
+//Star component
 function Star({ no }) {
   //Set the reference value for this star
   const starRef = useRef(null);
@@ -126,10 +129,12 @@ function Star({ no }) {
   );
 }
 
+//3D scene component containing all elements
 function Scene({ scrollProgress }) {
   //Create the GL layer
   const gl = useThree((state) => state.gl);
 
+  //Set the angle and distances (this is manipulated by the scroll progress)
   const yAngle = useTransform(
     scrollProgress,
     [0, 1],
@@ -138,7 +143,7 @@ function Scene({ scrollProgress }) {
   const distance = useTransform(scrollProgress, [0, 1], [10, 5]);
   const time = useTime();
 
-  //Camera object for the 3D scene (this is manipulated by the scroll progress)
+  //Camera object for the 3D scene
   useFrame(({ camera }) => {
     camera.position.setFromSphericalCoords(
       distance.get(), //Distance forwards / zoom
@@ -149,7 +154,7 @@ function Scene({ scrollProgress }) {
     camera.lookAt(0, 0, 0);
   });
 
-  //Create random star objects by for looping
+  //Create 100 random star objects by for looping
   const stars = [];
   for (let i = 0; i < 100; i++) {
     stars.push(<Star key={`star_${i}`} no={progress(0, 100, i)} />);
@@ -158,7 +163,7 @@ function Scene({ scrollProgress }) {
   //Set pixel ratio
   useLayoutEffect(() => gl.setPixelRatio(1));
 
-  //Render the full scene and add light object to it
+  //Build the full scene and add amb.light object to it
   return (
     <>
       <ambientLight intensity={1} color={"white"} />
@@ -174,9 +179,11 @@ function Scene({ scrollProgress }) {
   );
 }
 
+//Render the default
 export default function SolarSystem() {
   const sceneRef = useRef(null);
 
+  //Scrolling is tracked here and passed along to the subcomponents
   const { scrollYProgress } = useScroll({
     target: sceneRef,
     offset: ["start end", "end end"],

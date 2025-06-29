@@ -17,8 +17,15 @@ export default function Header() {
       <nav className="external">
         {mainMenu.map((menuItem, index) => {
           return (
-            <a href={menuItem.acf.url} target="_blank" key={index}>
-              {/* <i
+            <a
+              href={menuItem.acf.url}
+              target="_blank"
+              key={index}
+              className="cursor_hint"
+              data-cursor-text="open"
+              data-cursor-icon="fas fa-arrow-up-right-from-square"
+            >
+              {/* THIS DOES NOT WORK FOR SOME REASON ? <i
                 className={
                   menuItem.acf.icon.style === "brands"
                     ? `fab fa-${menuItem.acf.icon.id}`

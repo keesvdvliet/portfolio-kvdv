@@ -19,7 +19,13 @@ export default function Outro() {
         <p>{pageContent.acf.text}</p>
 
         <div className="button_holder">
-          <a href={pageContent.acf.url} target="_blank" className="button">
+          <a
+            href={pageContent.acf.url}
+            target="_blank"
+            className="btn cursor_hint"
+            data-cursor-text="open"
+            data-cursor-icon="fas fa-arrow-up-right-from-square"
+          >
             <span className="icon">
               <i className="fab fa-linkedin"></i>
             </span>

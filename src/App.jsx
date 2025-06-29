@@ -5,6 +5,11 @@ import Outro from "./components/Outro";
 import AnimatedCursor from "./components/AnimatedCursor";
 
 function App() {
+  //Check if the current device is a touch enabled device
+  const isTouchDevice = window.matchMedia(
+    "(hover: none) and (pointer: coarse)"
+  ).matches;
+
   return (
     <div className="App">
       <Hero />
@@ -12,7 +17,8 @@ function App() {
       <Experience />
       <Outro />
 
-      <AnimatedCursor />
+      {/* Include the custom cursor only on mouse enbaled devices */}
+      {isTouchDevice || <AnimatedCursor />}
     </div>
   );
 }

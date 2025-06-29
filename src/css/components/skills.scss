@@ -48,8 +48,6 @@
       font-weight: $boldWeight;
       font-size: 16px;
     }
-
-    cursor: pointer;
   }
 
   .scroller_wrapper {
@@ -153,8 +151,6 @@
         overflow-y: scroll;
         opacity: 0;
 
-        cursor: all-scroll;
-
         position: absolute;
         top: 0;
         left: 0;
@@ -206,8 +202,6 @@
 
     height: auto;
     width: 100%;
-
-    cursor: pointer;
 
     .switch_name {
       color: $white;
