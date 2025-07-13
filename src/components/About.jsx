@@ -22,7 +22,7 @@ const passportPhoto = await fetchMediaFromApi(
 import "../css/components/about.scss";
 
 //Render the default
-export default function About({ openStatus, closeWindow }) {
+export default function About({ openStatus, fxStatus, closeWindow }) {
   //Function that calculates years since given date (input date in YYYY-MM-DD)
   function calcYearsSince(inputDate) {
     const from = new Date(inputDate);
@@ -75,16 +75,16 @@ export default function About({ openStatus, closeWindow }) {
   return (
     <>
       <div className={`about_wrapper ${openStatus || "inactive"}`}>
-        <div className={`about_window ${openStatus || "inactive"}`}>
+        <div className={`about_window ${fxStatus || "inactive"}`}>
           <AnimatePresence>
             {openStatus ? (
               <motion.div
-                initial={{ scale: 1.05, opacity: 0, filter: "blur(10px)" }}
+                initial={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
                 animate={{ scale: 1, opacity: 1, filter: "blur(0)" }}
-                exit={{ scale: 1.05, opacity: 0, filter: "blur(10px)" }}
+                exit={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
                 transition={{
                   type: "spring",
-                  damping: 20,
+                  damping: 50,
                   stiffness: 400,
                   duration: 0.25,
                   delay: 0.2,
@@ -169,9 +169,9 @@ export default function About({ openStatus, closeWindow }) {
                 onClick={closeWindow}
                 transition={{
                   type: "spring",
-                  damping: 100,
+                  damping: 50,
                   stiffness: 400,
-                  delay: 0.2,
+                  delay: 0,
                 }}
               >
                 <span className="icon">

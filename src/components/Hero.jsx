@@ -47,12 +47,16 @@ function Intro() {
   const [emojis, setEmojis] = useState(meInEmoji);
   const [exploding, setExploding] = useState(false);
   const [aboutWindowStatus, setAboutWindowStatus] = useState(false);
+  const [aboutWindowFXstatus, setAboutWindowFXstatus] = useState(false);
 
   //Function that handle the exploding effect when clicking
   function handleClick() {
     setEmojis(meInEmoji);
     setExploding(true);
     setAboutWindowStatus((a) => !a);
+    setTimeout(() => {
+      setAboutWindowFXstatus((f) => !f);
+    }, 250);
     resetExplosion();
   }
 
@@ -67,11 +71,16 @@ function Intro() {
   //Function that closes the about window
   function closeAbout() {
     setAboutWindowStatus((a) => !a);
+    setAboutWindowFXstatus((f) => !f);
   }
 
   return (
     <>
-      <About openStatus={aboutWindowStatus} closeWindow={closeAbout} />
+      <About
+        openStatus={aboutWindowStatus}
+        fxStatus={aboutWindowFXstatus}
+        closeWindow={closeAbout}
+      />
 
       <section className="intro">
         <Header />
