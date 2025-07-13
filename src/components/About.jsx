@@ -169,7 +169,7 @@ export default function About({ openStatus, fxStatus, closeWindow }) {
                 onClick={closeWindow}
                 transition={{
                   type: "spring",
-                  damping: 50,
+                  damping: 100,
                   stiffness: 400,
                   delay: 0,
                 }}

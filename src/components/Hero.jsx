@@ -54,10 +54,11 @@ function Intro() {
     setEmojis(meInEmoji);
     setExploding(true);
     setAboutWindowStatus((a) => !a);
+    resetExplosion();
+
     setTimeout(() => {
       setAboutWindowFXstatus((f) => !f);
     }, 250);
-    resetExplosion();
   }
 
   //Function that resets the explosion states
@@ -65,7 +66,7 @@ function Intro() {
     setTimeout(() => {
       setEmojis([]);
       setExploding(false);
-    }, 1000);
+    }, 1005);
   }
 
   //Function that closes the about window
@@ -143,7 +144,7 @@ function Intro() {
               return (
                 <motion.span
                   className="singleEmoji"
-                  key={k}
+                  key={`"emoji_${k}`}
                   initial={{ opacity: 1, x: 0, y: 0, scale: 0 }}
                   animate={
                     exploding
