@@ -30,21 +30,35 @@ const pageStudyContent = await fetchPageFromApi(
 
 //Render the default
 export default function Experience() {
+  //Create circles for background graphic
+  const circleGraphic = [];
+  for (let c = 1; c < 6; c++) {
+    circleGraphic.push(
+      <span key={`c${c}`} className={`circle_${c}`}>
+        &nbsp;
+      </span>
+    );
+  }
+
   return (
     <section className="experience">
-      <div className="experience_wrapper">
-        <div className="experience_list">
-          <ExperienceList
-            title={pageWorkContent.acf.title}
-            description={pageWorkContent.acf.text}
-            list={work_experience}
-          />
-          <ExperienceList
-            title={pageStudyContent.acf.title}
-            description={pageStudyContent.acf.text}
-            list={study_experience}
-          />
+      <div className="experience_container">
+        <div className="experience_wrapper">
+          <div className="experience_list">
+            <ExperienceList
+              title={pageWorkContent.acf.title}
+              description={pageWorkContent.acf.text}
+              list={work_experience}
+            />
+            <ExperienceList
+              title={pageStudyContent.acf.title}
+              description={pageStudyContent.acf.text}
+              list={study_experience}
+            />
+          </div>
         </div>
+
+        <div className="experience_graphic">{circleGraphic}</div>
       </div>
     </section>
   );
