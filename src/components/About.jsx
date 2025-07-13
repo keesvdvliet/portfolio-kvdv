@@ -22,12 +22,11 @@ const passportPhoto = await fetchMediaFromApi(
 import "../css/components/about.scss";
 
 //Render the default
-export default function About({ closeWindow }) {
+export default function About({ openStatus, closeWindow }) {
   //Function that calculates years since given date (input date in YYYY-MM-DD)
   function calcYearsSince(inputDate) {
     const from = new Date(inputDate);
     const to = new Date();
-    ``;
 
     //Calculate the years between the dates
     let years = to.getFullYear() - from.getFullYear();
@@ -74,97 +73,120 @@ export default function About({ closeWindow }) {
   }));
 
   return (
-    <AnimatePresence>
-      <div className="about_wrapper">
-        <div className="about_window">
-          <motion.div
-            initial={{ scale: 1.05, opacity: 0, filter: "blur(10px)" }}
-            animate={{ scale: 1, opacity: 1, filter: "blur(0)" }}
-            exit={{ scale: 1.05, opacity: 0, filter: "blur(10px)" }}
-            transition={{ type: "ease", duration: 0.25 }}
-            className="about_window_content passport"
-          >
-            <div className="passport_header">
-              <div className="passport_photo">
-                <img src={passportPhoto} />
-              </div>
+    <>
+      <div className={`about_wrapper ${openStatus || "inactive"}`}>
+        <div className={`about_window ${openStatus || "inactive"}`}>
+          <AnimatePresence>
+            {openStatus ? (
+              <motion.div
+                initial={{ scale: 1.05, opacity: 0, filter: "blur(10px)" }}
+                animate={{ scale: 1, opacity: 1, filter: "blur(0)" }}
+                exit={{ scale: 1.05, opacity: 0, filter: "blur(10px)" }}
+                transition={{
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 400,
+                  duration: 0.25,
+                  delay: 0.2,
+                }}
+                className="about_window_content passport"
+              >
+                <div className="passport_header">
+                  <div className="passport_photo">
+                    <img src={passportPhoto} />
+                  </div>
 
-              <div className="passport_maininfo">
-                <div className="passport_item">
-                  <span className="label">Naam</span>
-                  <span className="value">{pageContent.acf.name}</span>
+                  <div className="passport_maininfo">
+                    <div className="passport_item">
+                      <span className="label">Naam</span>
+                      <span className="value">{pageContent.acf.name}</span>
+                    </div>
+                    <div className="passport_item">
+                      <span className="label">Leeftijd</span>
+                      <span className="value">{currentAge}&nbsp;jaar</span>
+                    </div>
+                    <div className="passport_item">
+                      <span className="label">Functie</span>
+                      <span className="value">{pageContent.acf.function}</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="passport_item">
-                  <span className="label">Leeftijd</span>
-                  <span className="value">{currentAge}&nbsp;jaar</span>
-                </div>
-                <div className="passport_item">
-                  <span className="label">Functie</span>
-                  <span className="value">{pageContent.acf.function}</span>
-                </div>
-              </div>
-            </div>
 
-            <ul className="passport_hobbies">
-              {hobbyItems.map((item, key) => (
-                <motion.li
-                  className="hobby_item"
-                  initial={{ x: 15, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  key={key}
-                  transition={{
-                    type: "ease",
-                    delay: 0.25 + key * 0.05,
-                    duration: 0.4,
+                <ul className="passport_hobbies">
+                  {hobbyItems.map((item, key) => (
+                    <motion.li
+                      className="hobby_item"
+                      initial={{ x: 15, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      key={key}
+                      transition={{
+                        type: "ease",
+                        delay: 0.25 + key * 0.05,
+                        duration: 0.4,
+                      }}
+                    >
+                      <span className="icon">{item.icon}</span>
+                      {item.text}
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <Swiper
+                  className="verification_bar"
+                  spaceBetween={0}
+                  slidesPerView="auto"
+                  speed={3000}
+                  modules={[Autoplay, FreeMode]}
+                  freeMode
+                  loop={true}
+                  autoplay={{
+                    delay: 0,
+                    disableOnInteraction: false,
                   }}
                 >
-                  <span className="icon">{item.icon}</span>
-                  {item.text}
-                </motion.li>
-              ))}
-            </ul>
+                  {verificationBarIcons.map((icon, key) => (
+                    <SwiperSlide
+                      key={`slide_${key}`}
+                      className="verification_bar_item"
+                    >
+                      <i className={`fas ${icon}`}></i>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
 
-            <Swiper
-              className="verification_bar"
-              spaceBetween={0}
-              slidesPerView="auto"
-              speed={3000}
-              modules={[Autoplay, FreeMode]}
-              freeMode
-              loop={true}
-              autoplay={{
-                delay: 0,
-                disableOnInteraction: false,
-              }}
-            >
-              {verificationBarIcons.map((icon, key) => (
-                <SwiperSlide
-                  key={`slide_${key}`}
-                  className="verification_bar_item"
-                >
-                  <i className={`fas ${icon}`}></i>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </motion.div>
-
-          <motion.div
-            className="round_btn close cursor_hint"
-            data-cursor-text="sluiten"
-            data-cursor-icon="fas fa-times"
-            layout
-            layoutId={"info-button"}
-            key={"about-close"}
-            onClick={closeWindow}
-          >
-            <span className="icon">
-              <i className="fas fa-times"></i>
-            </span>
-          </motion.div>
+          <AnimatePresence>
+            {openStatus && (
+              <motion.div
+                className="round_btn close cursor_hint"
+                data-cursor-text="sluiten"
+                data-cursor-icon="fas fa-times"
+                layout
+                layoutId={"info-button"}
+                key={"about-close"}
+                onClick={closeWindow}
+                transition={{
+                  type: "spring",
+                  damping: 100,
+                  stiffness: 400,
+                  delay: 0.2,
+                }}
+              >
+                <span className="icon">
+                  <i className="fas fa-times"></i>
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        <div className="interaction_zone" onClick={closeWindow}></div>
+        <div
+          className={`interaction_zone ${openStatus || "inactive"}`}
+          onClick={closeWindow}
+        ></div>
       </div>
-    </AnimatePresence>
+    </>
   );
 }

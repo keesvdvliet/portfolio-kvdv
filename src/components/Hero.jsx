@@ -71,7 +71,7 @@ function Intro() {
 
   return (
     <>
-      {aboutWindowStatus && <About closeWindow={closeAbout} />}
+      <About openStatus={aboutWindowStatus} closeWindow={closeAbout} />
 
       <section className="intro">
         <Header />

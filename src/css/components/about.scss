@@ -16,6 +16,10 @@
   align-items: center;
   justify-content: center;
 
+  &.inactive {
+    pointer-events: none;
+  }
+
   .interaction_zone {
     display: block;
 
@@ -26,15 +30,21 @@
     top: 0;
     left: 0;
     z-index: 0;
+
+    &.inactive {
+      display: none;
+      pointer-events: none;
+    }
   }
 }
 
 .about_window {
   display: block;
 
-  height: 400px;
-  width: calc(100% - 30px);
+  height: auto;
+  width: calc(100% - 10px);
   max-width: 650px;
+  max-height: calc(100vh - 10px);
 
   position: relative;
   z-index: 1;
@@ -42,6 +52,8 @@
   border-radius: $border-radius;
 
   .passport {
+    display: block;
+
     height: 100%;
     width: 100%;
 
@@ -50,6 +62,9 @@
 
     background: rgba(0, 0, 0, 0.75);
     border-radius: $border-radius;
+
+    max-height: calc(100vh - 10px);
+    overflow-y: scroll;
 
     .passport_header {
       height: auto;
@@ -172,7 +187,7 @@
       height: auto;
 
       list-style: none;
-      padding: 0 25px 25px 25px;
+      padding: 0 25px 50px 25px;
       margin: 0;
 
       .hobby_item {
@@ -261,6 +276,17 @@
     left: 0;
 
     backdrop-filter: blur(10px);
+    border-radius: $border-radius;
+    overflow: hidden;
+
+    transition: all 0.25s ease;
+    transition-delay: 0.2;
+  }
+
+  &.inactive {
+    &::after {
+      backdrop-filter: blur(0);
+    }
   }
 }
 
@@ -280,9 +306,23 @@
 @media screen and (max-width: 625px) {
   .about_window {
     .passport {
+      display: flex;
+      flex-wrap: wrap;
+
       .passport_header {
+        order: 0;
+        width: 100%;
+        flex-shrink: 0;
+
         flex-wrap: wrap;
         justify-content: center;
+
+        padding: 25px 25px 5px 25px;
+
+        .passport_photo {
+          height: 175px;
+          width: 175px;
+        }
 
         .passport_maininfo {
           width: 100%;
@@ -312,19 +352,23 @@
         }
       }
 
+      .verification_bar {
+        order: 1;
+        width: 100%;
+        flex-shrink: 0;
+
+        position: relative;
+        border-radius: 0;
+      }
+
       .passport_hobbies {
-        border-top: 1px solid rgba(255, 255, 255, 0.4);
-        padding: 25px 25px 35px 25px;
-        margin-top: -10px;
+        order: 2;
+        width: 100%;
+        flex-shrink: 0;
+
+        padding: 25px 25px 0 25px;
         justify-content: center;
       }
     }
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .about_window {
-    height: calc(100vh - 30px);
-    overflow-y: scroll;
   }
 }
