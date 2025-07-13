@@ -234,3 +234,25 @@ p,
     font-size: 25px;
   }
 }
+
+@media screen and (max-width: 350px) {
+  h1,
+  .h1 {
+    font-size: 30px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 26px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 24px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 22px;
+  }
+}

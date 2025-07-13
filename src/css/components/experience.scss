@@ -7,6 +7,7 @@
 
   width: 100%;
   height: auto;
+  overflow: hidden;
 
   color: $white;
 
@@ -256,14 +257,16 @@
   }
 }
 
+@media screen and (max-width: 1050px) {
+  .experience .experience_wrapper {
+    padding: 0;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .experience {
     .experience_section {
       padding: 0 20px;
-    }
-
-    .experience_wrapper {
-      padding: 80px 0 95px 0;
     }
 
     .experience_list .experience_item {
