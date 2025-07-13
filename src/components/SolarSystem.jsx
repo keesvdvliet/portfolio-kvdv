@@ -161,7 +161,7 @@ function Scene({ scrollProgress }) {
   }
 
   //Set pixel ratio
-  useLayoutEffect(() => gl.setPixelRatio(1));
+  useLayoutEffect(() => gl.setPixelRatio(window.devicePixelRatio));
 
   //Build the full scene and add amb.light object to it
   return (
