@@ -55,10 +55,7 @@ function Intro() {
     setExploding(true);
     setAboutWindowStatus((a) => !a);
     resetExplosion();
-
-    setTimeout(() => {
-      setAboutWindowFXstatus((f) => !f);
-    }, 250);
+    setAboutWindowFXstatus((f) => !f);
   }
 
   //Function that resets the explosion states

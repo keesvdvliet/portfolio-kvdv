@@ -104,21 +104,19 @@ export default function Skills() {
           </AnimatePresence>
 
           {(activeList === "dev" && dev_stack.length >= 5) ||
-          (activeList === "other" && other_stack.length >= 5) ? (
-            <button
-              className="skill_extender btn white"
-              onClick={() => setOpenStack((s) => !s)}
-            >
-              <span className="icon">
-                <i className={`fas fa-${openStack ? "minus" : "plus"}`}></i>
-              </span>
-              <span className="text">
-                {openStack ? "Sluiten" : "Open de volledige stack"}
-              </span>
-            </button>
-          ) : (
-            ""
-          )}
+          (activeList === "other" && other_stack.length >= 5)
+            ? // <button
+              //   className="skill_extender btn white"
+              //   onClick={() => setOpenStack((s) => !s)}
+              // >
+              //   <span className="icon">
+              //     <i className="fas fa-eye"></i>
+              //   </span>
+
+              //   <span className="text">Bekijk alles</span>
+              // </button>
+              ""
+            : ""}
         </div>
 
         <div className="skill_scroller scroll_object" ref={scrollReference}>

@@ -66,6 +66,13 @@
     max-height: calc(100vh - 10px);
     overflow-y: scroll;
 
+    //CSS to hide scrollbar
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     .passport_header {
       height: auto;
       width: 100%;
@@ -280,12 +287,25 @@
     overflow: hidden;
 
     transition: all 0.25s ease;
+
+    opacity: 0;
+    animation-delay: 0.25s;
+    animation: reveal 0.2s forwards;
   }
 
   &.inactive {
     &::after {
       backdrop-filter: blur(0);
     }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

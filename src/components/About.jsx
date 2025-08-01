@@ -87,7 +87,7 @@ export default function About({ openStatus, fxStatus, closeWindow }) {
                   damping: 50,
                   stiffness: 400,
                   duration: 0.25,
-                  delay: 0.2,
+                  delay: 0.25,
                 }}
                 className="about_window_content passport"
               >
@@ -163,15 +163,17 @@ export default function About({ openStatus, fxStatus, closeWindow }) {
                 className="round_btn close cursor_hint"
                 data-cursor-text="sluiten"
                 data-cursor-icon="fas fa-times"
-                layout
-                layoutId={"info-button"}
                 key={"about-close"}
                 onClick={closeWindow}
+                initial={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
+                animate={{ scale: 1, opacity: 1, filter: "blur(0)" }}
+                exit={{ scale: 0.9, opacity: 0, filter: "blur(10px)" }}
                 transition={{
                   type: "spring",
-                  damping: 100,
+                  damping: 50,
                   stiffness: 400,
-                  delay: 0,
+                  duration: 0.25,
+                  delay: 0.25,
                 }}
               >
                 <span className="icon">

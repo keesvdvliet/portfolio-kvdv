@@ -13,32 +13,6 @@
   margin: 0 auto;
   padding: 120px 20px;
 
-  .skill_extender {
-    display: none;
-    margin: 0 auto;
-
-    z-index: 888;
-    left: unset;
-    top: unset;
-
-    @include box-shadow();
-
-    &::after {
-      display: none;
-      content: "";
-
-      height: 20px;
-      width: 200%;
-
-      position: absolute;
-      z-index: 777;
-      top: -10px;
-      left: -50%;
-
-      background: hotpink;
-    }
-  }
-
   .scroller_wrapper {
     position: relative;
     z-index: 6;
@@ -344,10 +318,6 @@
       padding: 0 0 35px 0;
     }
 
-    .skill_extender {
-      display: flex;
-    }
-
     .skill_switcher {
       margin: 0 auto;
       justify-content: center;
@@ -372,16 +342,6 @@
             }
             .name {
               font-size: 18px;
-            }
-          }
-        }
-
-        &.stack_open {
-          .skill_cards {
-            .skill_card {
-              margin-top: 0 !important;
-              margin-bottom: 18px !important;
-              transform: scale(1) !important;
             }
           }
         }
@@ -418,7 +378,9 @@
 }
 
 @media screen and (max-width: 525px) {
-  .skills .scroller_wrapper .skill_scroller {
-    width: 100%;
+  .skills {
+    .scroller_wrapper .skill_scroller {
+      width: 100%;
+    }
   }
 }
